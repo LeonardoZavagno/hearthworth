@@ -10,12 +10,12 @@
     <version>5.0.6</version>
   </parent>
 
-  <groupId>com.hearthworth.core</groupId>
-  <artifactId>core</artifactId>
+  <groupId>com.hearthworth</groupId>
+  <artifactId>hearthworth-parent</artifactId>
   <version>${revision}</version>
-  <packaging>${packaging}</packaging>
-  <name>hearthworth.core</name>
-  <description>Hearth Worth core module</description>
+  <packaging>pom</packaging>
+  <name>hearthworth</name>
+  <description>Hearth Worth multi-module application</description>
 
   <licenses>
     <license>
@@ -25,17 +25,10 @@
     </license>
   </licenses>
 
-  <properties>
-    <revision>0.0.1-SNAPSHOT</revision>
-    <packaging>jar</packaging>
-    <jdk.version>25</jdk.version>
-    <release.version>25</release.version>
-    <micronaut.version>5.0.6</micronaut.version>
-    <micronaut.aot.enabled>false</micronaut.aot.enabled>
-    <micronaut.aot.packageName>com.hearthworth.core.aot.generated</micronaut.aot.packageName>
-    <micronaut.runtime>netty</micronaut.runtime>
-    <exec.mainClass>com.hearthworth.core.Application</exec.mainClass>
-  </properties>
+  <modules>
+    <module>core</module>
+    <module>app</module>
+  </modules>
 
   <repositories>
     <repository>
@@ -44,111 +37,16 @@
     </repository>
   </repositories>
 
-
-  <dependencies>
-
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-server-netty</artifactId>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.micronaut.serde</groupId>
-      <artifactId>micronaut-serde-jackson</artifactId>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-client</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.micronaut.test</groupId>
-      <artifactId>micronaut-test-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.micronaut.maven</groupId>
-        <artifactId>micronaut-maven-plugin</artifactId>
-        <configuration>
-          <configFile>aot-${packaging}.properties</configFile>
-          <configurationValidation>
-              <enabled>false</enabled>
-
-              <suppressions>
-                  <suppression>datasources.default.db-type</suppression>
-              </suppressions>
-              <failOnNotPresent>true</failOnNotPresent>
-              <validateDependencyInjection>false</validateDependencyInjection>
-              <cacheEnabled>true</cacheEnabled>
-
-          </configurationValidation>
-
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
-          <annotationProcessorPaths combine.children="append">
-            <path>
-              <groupId>io.micronaut</groupId>
-              <artifactId>micronaut-http-validation</artifactId>
-              <version>${micronaut.core.version}</version>
-            </path>
-            <path>
-              <groupId>io.micronaut.serde</groupId>
-              <artifactId>micronaut-serde-processor</artifactId>
-              <version>${micronaut.serialization.version}</version>
-              <exclusions>
-                <exclusion>
-                  <groupId>io.micronaut</groupId>
-                  <artifactId>micronaut-inject</artifactId>
-                </exclusion>
-              </exclusions>
-            </path>
-          </annotationProcessorPaths>
-          <compilerArgs>
-            <arg>-Amicronaut.processing.group=com.hearthworth.core</arg>
-            <arg>-Amicronaut.processing.module=demo</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
+  <properties>
+    <revision>0.0.1-SNAPSHOT</revision>
+    <package>jar</package>
+    <jdk.version>25</jdk.version>
+    <release.version>25</release.version>
+    <micronaut.version>5.0.6</micronaut.version>
+    <micronaut.aot.enabled>false</micronaut.aot.enabled>
+    <micronaut.aot.packageName>com.hearthworth.aot.generated</micronaut.aot.packageName>
+    <micronaut.runtime>netty</micronaut.runtime>
+    <exec.mainClass>com.hearthworth.app.Application</exec.mainClass>
+  </properties>
 
 </project>
