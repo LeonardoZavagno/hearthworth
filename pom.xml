@@ -30,16 +30,8 @@
     <module>app</module>
   </modules>
 
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-  </repositories>
-
   <properties>
     <revision>0.0.1-SNAPSHOT</revision>
-    <package>jar</package>
     <jdk.version>25</jdk.version>
     <release.version>25</release.version>
     <micronaut.version>5.0.6</micronaut.version>

@@ -1,4 +1,4 @@
-package com.hearthworth.app;
+package com.hearthworth.core;
 
 
 import io.micronaut.runtime.EmbeddedApplication;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import jakarta.inject.Inject;
 
 @MicronautTest
-class CoreTest {
+class ApplicationTest {
 
     @Inject
     EmbeddedApplication<?> application;
