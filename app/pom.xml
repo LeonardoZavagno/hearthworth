@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.hearthworth</groupId>
+    <artifactId>hearthworth-parent</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>hearthworth-app</artifactId>
+  <name>hearthworth-app</name>
+  <description>Hearth Worth launcher</description>
+  <packaging>${package}</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.hearthworth</groupId>
+      <artifactId>hearthworth-core</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.micronaut.maven</groupId>
+        <artifactId>micronaut-maven-plugin</artifactId>
+        <configuration>
+          <configFile>aot-jar.properties</configFile>
+          <configurationValidation>
+            <enabled>false</enabled>
+            <suppressions>
+              <suppression>datasources.default.db-type</suppression>
+            </suppressions>
+            <failOnNotPresent>true</failOnNotPresent>
+            <validateDependencyInjection>false</validateDependencyInjection>
+            <cacheEnabled>true</cacheEnabled>
+          </configurationValidation>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths combine.children="append">
+            <path>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-http-validation</artifactId>
+              <version>${micronaut.core.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut.serde</groupId>
+              <artifactId>micronaut-serde-processor</artifactId>
+              <version>${micronaut.serialization.version}</version>
+              <exclusions>
+                <exclusion>
+                  <groupId>io.micronaut</groupId>
+                  <artifactId>micronaut-inject</artifactId>
+                </exclusion>
+              </exclusions>
+            </path>
+          </annotationProcessorPaths>
+          <compilerArgs>
+            <arg>-Amicronaut.processing.group=com.hearthworth.app</arg>
+            <arg>-Amicronaut.processing.module=app</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
